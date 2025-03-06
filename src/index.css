@@ -13,7 +13,7 @@ button {
 body {
   font-family: Inter, sans-serif;
   height: 100vh;
-  background-image: radial-gradient(ellipse, #385300, #212900);
+  background-image: radial-gradient(ellipse, rgb(11, 34, 112), rgb(16, 0, 41));
 }
 
 #root {
@@ -30,7 +30,7 @@ main {
 }
 
 .card {
-  background-color: #bef227;
+  background-color: rgb(39, 144, 242);
   width: 476px;
   height: 615px;
   border-radius: 12px;
@@ -42,7 +42,7 @@ main {
 }
 
 .card--limit {
-  background-color: #a3d11b;
+  background-color: rgb(27, 91, 209);
 }
 
 .title {
@@ -114,7 +114,7 @@ main {
 }
 
 .count-btn-icon {
-  color: #bdfe00;
+  color: rgb(0, 152, 254);
   opacity: 0.9;
   height: 40px;
   width: 40px;
