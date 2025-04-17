@@ -1,4 +1,4 @@
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 
 export default function CountButton({ setCount, type, locked }) {
   const handleClick = (event) => {
@@ -16,9 +16,9 @@ export default function CountButton({ setCount, type, locked }) {
   return (
     <button disabled={locked} onClick={handleClick} className="count-btn">
       {type === "minus" ? (
-        <MinusIcon className="count-btn-icon" />
-      ) : (
         <PlusIcon className="count-btn-icon" />
+      ) : (
+        <SketchLogoIcon className="count-btn-icon" />
       )}
     </button>
   );
