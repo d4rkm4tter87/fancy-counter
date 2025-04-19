@@ -13,10 +13,13 @@ function App() {
     const rdm = Math.floor(Math.random() * amount) + 1;
     const calc = 1 + 0.1 * rdm;
     const result = calc * count;
-    const threshold = 1500;
+    const threshold = 5000;
     const coinflip = Math.floor(Math.random() * threshold);
-    console.log(result, "-", coinflip, "-", count);
-    setBoom(coinflip < result);
+    const amountReducer = Math.round(rdm / 3) + 1;
+    const result2 = result * amountReducer;
+    //console.log(amountReducer, "-", result, "-", result2, "-", coinflip);
+    //console.log(coinflip, result2);
+    setBoom(coinflip < result2);
     setCount(count + rdm);
   };
   const cash = () => {
