@@ -1,6 +1,7 @@
 export default function Count({ count, exploded, calculateCount }) {
   const calculateSize = (count) => {
-    return 40 + count * 2.5;
+    const size = !exploded ? 1 : 1.6;
+    return (40 + count * 2.5) * size;
   };
   return (
     <>

@@ -23,13 +23,16 @@ function App() {
     setCount(count + rdm);
   };
   const cash = () => {
+    if (boom) return;
     if (count > highest) setHighest(count);
     setCount(0);
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.code === "Space") {
+      if (event.code === "Space" && !boom) {
+        const rand = Math.floor(Math.random() * 500) + 1;
+        setBoom(rand === 50 ? true : false);
         setCount(count + 1);
       }
     };
@@ -37,7 +40,7 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [count]);
+  }, [count, boom]);
   return (
     <>
       <div className="button-container-outer">
