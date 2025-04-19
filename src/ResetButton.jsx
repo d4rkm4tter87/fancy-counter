@@ -1,9 +1,15 @@
 import { ResetIcon } from "@radix-ui/react-icons";
 
-export default function ResetButton({ setCount, setBoom, boom }) {
+export default function ResetButton({
+  setCount,
+  setBoom,
+  boom,
+  setSpaceCounter,
+}) {
   const handleClick = (event) => {
     setCount(0);
     setBoom(false);
+    setSpaceCounter(0);
     event.currentTarget.blur();
   };
   return (

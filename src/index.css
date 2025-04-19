@@ -14,8 +14,57 @@ body {
   font-family: Inter, sans-serif;
   height: 100vh;
   background-image: radial-gradient(ellipse, rgb(11, 34, 112), rgb(16, 0, 41));
+  overflow: hidden;
 }
 
+.blinker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: -1;
+}
+
+.blink-animation1 {
+  animation: blink 0.4s infinite;
+}
+
+.blink-animation2 {
+  animation: blink 0.1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-image: radial-gradient(
+      ellipse,
+      rgb(11, 34, 112),
+      rgb(16, 0, 41)
+    );
+  }
+  33% {
+    background-image: radial-gradient(
+      ellipse,
+      rgb(11, 34, 112),
+      rgb(16, 0, 41)
+    );
+  }
+  66% {
+    background-image: radial-gradient(
+      ellipse,
+      rgb(255, 255, 255),
+      rgb(16, 0, 41)
+    );
+  }
+  100% {
+    background-image: radial-gradient(
+      ellipse,
+      rgb(255, 255, 255),
+      rgb(255, 255, 255)
+    );
+  }
+}
 #root {
   width: 100%;
   height: 100%;
@@ -23,7 +72,7 @@ body {
 
 main {
   width: 100%;
-  height: 60%;
+  height: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +139,7 @@ main {
 }
 
 .count__img {
+  margin-top: 110px;
   cursor: pointer;
 }
 

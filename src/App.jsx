@@ -3,17 +3,21 @@ import { useEffect, useState } from "react";
 import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import Highscore from "./Highscore";
 import ResetButton from "./ResetButton";
+import Blinker from "./Blinker";
 
 function App() {
   const [count, setCount] = useState(0);
   const [boom, setBoom] = useState(false);
+  const [spaceCounter, setSpaceCounter] = useState(0);
+  const [spaceTrigger, setSpaceTrigger] = useState(0);
+  const [blinker, setBlinker] = useState(0);
   const [highest, setHighest] = useState(false);
   const calculateCount = (amount) => {
     if (boom) return;
     const rdm = Math.floor(Math.random() * amount) + 1;
     const calc = 1 + 0.1 * rdm;
     const result = calc * count;
-    const threshold = 5000;
+    const threshold = 3000;
     const coinflip = Math.floor(Math.random() * threshold);
     const amountReducer = Math.round(rdm / 3) + 1;
     const result2 = result * amountReducer;
@@ -26,23 +30,64 @@ function App() {
     if (boom) return;
     if (count > highest) setHighest(count);
     setCount(0);
+    setSpaceCounter(spaceCounter - 1);
+    setSpaceTrigger(0);
+  };
+
+  const getSpaceTrigger = (x) => {
+    switch (x) {
+      case 0:
+        return 20;
+      case 1:
+        return 60;
+      case 3:
+        return 110;
+      case 4:
+        return 220;
+      case 5:
+        return 400;
+      default:
+        return 20;
+    }
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === "Space" && !boom) {
-        const rand = Math.floor(Math.random() * 500) + 1;
-        setBoom(rand === 50 ? true : false);
         setCount(count + 1);
+        setSpaceCounter(spaceCounter + 1);
+        //console.log(spaceCounter, spaceTrigger);
+        if (spaceCounter > getSpaceTrigger(spaceTrigger)) {
+          if (spaceTrigger == 4) {
+            setBlinker(1);
+          } else if (spaceTrigger > 4) {
+            setBlinker(2);
+          }
+          setSpaceTrigger(spaceTrigger + 1);
+          setBoom(true);
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [count, boom]);
+  }, [count, boom, spaceCounter, spaceTrigger]);
+
+  useEffect(() => {
+    if (blinker > 0) {
+      const bTimer = blinker == 1 ? 700 : 1800;
+      const timer = setTimeout(() => {
+        setBlinker(0);
+        setSpaceTrigger(0);
+        setSpaceCounter(0);
+      }, bTimer);
+      return () => clearTimeout(timer);
+    }
+  }, [blinker]);
   return (
     <>
+      {blinker > 0 && <Blinker mode={blinker} />}
       <div className="button-container-outer">
         <div className="button-container-inner">
           <button
@@ -79,7 +124,12 @@ function App() {
         <Count count={count} exploded={boom} calculateCount={calculateCount} />
       </main>
 
-      <ResetButton setCount={setCount} setBoom={setBoom} boom={boom} />
+      <ResetButton
+        setCount={setCount}
+        setBoom={setBoom}
+        boom={boom}
+        setSpaceCounter={setSpaceCounter}
+      />
 
       <Highscore score={highest} />
     </>
