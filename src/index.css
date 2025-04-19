@@ -89,6 +89,10 @@ main {
   opacity: 0.5;
 }
 
+.count__img {
+  cursor: pointer;
+}
+
 .reset-btn-icon {
   color: #027edb;
   height: 40px;
