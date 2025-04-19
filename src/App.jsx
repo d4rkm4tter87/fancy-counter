@@ -79,8 +79,10 @@ function App() {
       const bTimer = blinker == 1 ? 700 : 1800;
       const timer = setTimeout(() => {
         setBlinker(0);
-        setSpaceTrigger(0);
-        setSpaceCounter(0);
+        if (blinker > 1) {
+          setSpaceTrigger(0);
+          setSpaceCounter(0);
+        }
       }, bTimer);
       return () => clearTimeout(timer);
     }
